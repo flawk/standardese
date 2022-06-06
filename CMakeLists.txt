@@ -9,9 +9,10 @@ option(STANDARDESE_BUILD_TOOL "Build the standardese binary" ON)
 option(STANDARDESE_BUILD_TEST "Build the standardese test suite" ON)
 option(BUILD_SHARED_LIBS "Build shared libraries (.dll/.so/.dylib) instead of static ones (.lib/.a)" ON)
 
-set(lib_dest "lib/standardese")
-set(include_dest "include")
-set(tool_dest "bin")
+include(GNUInstallDirs)
+set(lib_dest "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/standardese" CACHE PATH "")
+set(include_dest "${CMAKE_INSTALL_INCLUDEDIR}" CACHE PATH "")
+set(tool_dest "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}" CACHE PATH "")
 
 # add external libraries
 include(external/external.cmake)
@@ -26,7 +27,7 @@ if (MSVC)
         )
 endif()
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS on)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "" FORCE)
 
 # subdirectories
 add_subdirectory(src)
@@ -38,5 +39,5 @@ if (STANDARDESE_BUILD_TEST)
 endif()
 
 # install configuration
-#install(EXPORT standardese DESTINATION "${lib_dest}")
-#install(FILES standardese-config.cmake LICENSE DESTINATION "${lib_dest}")
+install(EXPORT standardese DESTINATION "${lib_dest}")
+install(FILES standardese-config.cmake LICENSE DESTINATION "${lib_dest}")
