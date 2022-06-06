@@ -99,6 +99,6 @@ target_link_libraries(standardese PUBLIC cppast)
 target_link_libraries(standardese PUBLIC libcmark-gfm_static)
 
 # install library: TODO
-#install(TARGETS standardese EXPORT standardese DESTINATION "${lib_dest}")
-#install(FILES ${header} DESTINATION "${include_dest}/standardese")
-#install(FILES ${detail_header} DESTINATION "${include_dest}/standardese/detail")
+install(TARGETS standardese EXPORT standardese DESTINATION "${lib_dest}")
+install(FILES ${header} DESTINATION "${include_dest}/standardese")
+install(FILES ${detail_header} DESTINATION "${include_dest}/standardese/detail")
